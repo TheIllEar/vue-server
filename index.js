@@ -9,9 +9,20 @@ import { startSocket } from './custom/socket.js';
 import { startMongoose } from './custom/mongoose.js';
 import authRoute from './routes/authRouter.js';
 import mainRoute from './routes/mainRouter.js';
+import bodyParser from 'body-parser';
+
+
+// ✅ Register the bodyParser middleware here
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
 
 // Process.env
 dotenv.config();
+console.log('Environment is:', process.env.NODE_ENV);
 
 // Static and Routes
 // const __filename = fileURLToPath(import.meta.url),
@@ -25,5 +36,3 @@ app.use('/auth', authRoute);
 // Custom
 startMongoose();
 startSocket(httpServer);
-
-console.log('NODE_ENV',process.env.NODE_ENV);

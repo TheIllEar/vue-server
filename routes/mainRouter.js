@@ -4,9 +4,9 @@
 
 import { Router } from 'express';
 
-const router = Router();
+const router = new Router();
 
-router.use('/', (req, res, next) => {
+router.get('/', (req, res, next) => {
   res.send('<h1 style="color: #6a00ff;">Hi, I am Server</h1>');
 //   res.render('pages/card', {
 //     item: card,
