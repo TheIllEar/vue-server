@@ -1,5 +1,5 @@
 /**
- * О компании
+ * Аутентификация
  */
 
 import { Router } from 'express';
@@ -12,17 +12,5 @@ router.post('/registration', authController.registration);
 router.post('/login', authController.login);
 router.get('/users', authController.getUsers);
 
-// router.get(`/auth`, async function (req, res, next) {
-//   try {
-//     console.log('databse 1111')
-
-//     // res.render('pages/card', {
-//     //   item: card,
-//     //   page: page,
-//     // });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
 
 export default router;
