@@ -17,26 +17,25 @@ export const startSocket = (httpServer) => {
   const JWT_SECRET = 'theillear';
   io.use(async (socket, next) => {
     const token = socket.handshake.auth.token; // fetch token from handshake auth sent by FE
-    console.log('check token');
     try {
-      const user = await jwt.verify(token, JWT_SECRET); // verify jwt token and get user data
-      console.log('user: ', user.name);
+      const user = await jwt.verify(token, JWT_SECRET);
       socket.user = user; // save the user data into socket object, to be used further
       next();
     } catch (e) {
-      console.log('error', e.message);
+      console.log('Error', e.message);
       return next(new Error(e.message));
     }
   });
 
   // Установка соединения
   io.on('connection', (socket) => {
-    socket.join('myRandomChatRoomId');
-    console.log('User connected');
+    const room = socket.handshake.auth.room;
+    // socket.join('myRandomChatRoomId');
+    socket.join(room);
+    console.log('User connected in room: ', room);
 
     socket.on('message', ({ message, roomName }, callback) => {
       console.log('Sent message: ' + message + ' in ' + roomName);
-
       // generate data to send to receivers
       const outgoingMessage = {
         name: socket.user.name,
