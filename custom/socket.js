@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 import { Server } from 'socket.io';
 
 export const startSocket = (httpServer) => {
-  const originUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://theillear.github.io/vue/',
+  const originUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://theillear.github.io',
     io = new Server(httpServer, {
       cors: {
         origins: [originUrl],
